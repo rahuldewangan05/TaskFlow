@@ -12,6 +12,51 @@ body {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     min-height: 100vh;
     overflow-x: hidden;
+    animation: fadeInBody 0.8s ease-out;
+}
+
+/* Page Loading Animation */
+@keyframes fadeInBody {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floating Particles Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(102, 126, 234, 0.05) 0%, transparent 50%);
+    animation: floatingParticles 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes floatingParticles {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.5;
+    }
+    33% {
+        transform: translateY(-20px) rotate(120deg);
+        opacity: 0.8;
+    }
+    66% {
+        transform: translateY(20px) rotate(240deg);
+        opacity: 0.3;
+    }
 }
 
 /* Landing Page Styles */
@@ -21,37 +66,32 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 20px;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    position: relative;
+    animation: containerFadeIn 1s ease-out;
 }
 
-.container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
-    pointer-events: none;
+@keyframes containerFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .logo-section {
     text-align: center;
-    margin-bottom: 60px;
-    animation: slideInFromTop 1s ease-out;
-    z-index: 1;
-    position: relative;
+    margin-bottom: 40px;
+    animation: logoSectionSlideIn 1.2s ease-out 0.3s both;
 }
 
-@keyframes slideInFromTop {
+@keyframes logoSectionSlideIn {
     from {
         opacity: 0;
-        transform: translateY(-80px);
+        transform: translateY(-30px);
     }
     to {
         opacity: 1;
@@ -60,25 +100,31 @@ body {
 }
 
 .logo {
-    margin-bottom: 40px;
-    position: relative;
+    margin-bottom: 20px;
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .shield-icon {
-    font-size: 56px;
+    font-size: 48px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    width: 100px;
-    height: 100px;
-    border-radius: 25px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    box-shadow: 
-        0 25px 50px rgba(102, 126, 234, 0.4),
-        0 15px 30px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
 }
@@ -90,93 +136,163 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 3s infinite;
 }
 
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    50% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
 }
 
 .shield-icon:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 
-        0 35px 70px rgba(102, 126, 234, 0.6),
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.5);
+    animation: pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.5);
+    }
+    100% {
+        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.8), 0 0 0 10px rgba(102, 126, 234, 0.1);
+    }
 }
 
 .logo-section h1 {
-    font-size: 3.2rem;
-    font-weight: 800;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -2px;
-    text-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    animation: titleGlow 2s ease-in-out infinite alternate;
     position: relative;
 }
 
+@keyframes titleGlow {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.3));
+    }
+    100% {
+        filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.6));
+    }
+}
+
 .subtitle {
-    font-size: 1.3rem;
-    color: #b0b0b0;
-    margin-bottom: 40px;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    opacity: 0.9;
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    margin-bottom: 20px;
+    animation: subtitleFadeIn 1s ease-out 0.8s both;
+}
+
+@keyframes subtitleFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .age-notice {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    color: #b0b0b0;
-    font-size: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px 25px;
-    border-radius: 50px;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    gap: 8px;
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    animation: noticeBounceIn 1s ease-out 1s both;
 }
 
-.age-notice:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
+@keyframes noticeBounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .info-icon {
     color: #667eea;
-    font-size: 1.2rem;
+    animation: iconRotate 2s ease-in-out infinite;
+}
+
+@keyframes iconRotate {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-5deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
 }
 
 .form-container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 35px;
-    padding: 60px 50px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 40px;
     width: 100%;
-    max-width: 500px;
-    box-shadow: 
-        0 40px 80px rgba(0, 0, 0, 0.3),
-        0 20px 40px rgba(102, 126, 234, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    animation: slideInFromBottom 1s ease-out 0.4s both;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: formSlideUp 1.2s ease-out 0.6s both;
     position: relative;
-    z-index: 1;
+    overflow: hidden;
 }
 
-@keyframes slideInFromBottom {
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+    animation: loadingBar 2s ease-in-out infinite;
+}
+
+@keyframes loadingBar {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+
+@keyframes formSlideUp {
     from {
         opacity: 0;
-        transform: translateY(80px) scale(0.9);
+        transform: translateY(50px) scale(0.9);
     }
     to {
         opacity: 1;
@@ -186,74 +302,122 @@ body {
 
 .form-container h2 {
     text-align: center;
-    margin-bottom: 40px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: -1px;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    animation: titleTypewriter 2s ease-out 1.2s both;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #667eea;
+}
+
+@keyframes titleTypewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
 }
 
 .form-group {
-    margin-bottom: 35px;
-    position: relative;
+    margin-bottom: 20px;
+    animation: formGroupFadeIn 0.8s ease-out both;
+}
+
+.form-group:nth-child(1) {
+    animation-delay: 1.4s;
+}
+
+.form-group:nth-child(2) {
+    animation-delay: 1.6s;
+}
+
+@keyframes formGroupFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: #e8e8e8;
-    font-size: 1.1rem;
-    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #e0e0e0;
+    transition: all 0.3s ease;
 }
 
 .form-group input {
     width: 100%;
-    padding: 22px 28px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.08);
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    font-size: 1.1rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
 }
 
 .form-group input:focus {
     outline: none;
     border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 
-        0 0 0 4px rgba(102, 126, 234, 0.25),
-        0 15px 35px rgba(102, 126, 234, 0.3);
-    transform: translateY(-4px);
+}
+
+.form-group input:focus + label,
+.form-group input:valid + label {
+    color: #667eea;
+    transform: translateY(-2px);
 }
 
 .form-group input::placeholder {
-    color: #a8a8a8;
+    color: #a0a0a0;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus::placeholder {
+    opacity: 0.7;
+    transform: translateX(5px);
 }
 
 .verify-btn {
     width: 100%;
-    padding: 20px 28px;
+    padding: 14px 20px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
-    border-radius: 18px;
+    border-radius: 8px;
     color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 35px;
+    gap: 8px;
+    margin-bottom: 20px;
     position: relative;
     overflow: hidden;
-    box-shadow: 
-        0 15px 35px rgba(102, 126, 234, 0.4),
-        0 8px 16px rgba(0, 0, 0, 0.2);
+    animation: buttonSlideIn 0.8s ease-out 1.8s both;
+}
+
+@keyframes buttonSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .verify-btn::before {
@@ -263,8 +427,8 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.8s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
 }
 
 .verify-btn:hover::before {
@@ -272,227 +436,355 @@ body {
 }
 
 .verify-btn:hover {
-    transform: translateY(-6px);
-    box-shadow: 
-        0 25px 50px rgba(102, 126, 234, 0.6),
-        0 15px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
 }
 
 .verify-btn:active {
-    transform: translateY(-3px);
+    transform: translateY(-1px) scale(0.98);
+    transition: all 0.1s ease;
 }
 
 .check-icon {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.verify-btn:hover .check-icon {
+    transform: rotate(360deg) scale(1.2);
 }
 
 .terms-notice {
     text-align: center;
-    font-size: 1rem;
-    color: #b0b0b0;
-    line-height: 1.7;
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    line-height: 1.4;
+    animation: noticeFadeIn 0.8s ease-out 2s both;
+}
+
+@keyframes noticeFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .error-message {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(220, 38, 38, 0.2) 100%);
-    border: 1px solid rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
     color: #fca5a5;
-    padding: 22px;
-    border-radius: 18px;
-    margin-top: 30px;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
     text-align: center;
-    font-size: 1.1rem;
-    animation: shake 0.8s ease-in-out;
-    box-shadow: 0 15px 35px rgba(239, 68, 68, 0.3);
+    font-size: 0.9rem;
+    animation: errorShake 0.5s ease-in-out;
 }
 
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
+@keyframes errorShake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
 }
 
 /* App Page Styles */
 .app-body {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     min-height: 100vh;
-    position: relative;
+    animation: appBodyFadeIn 0.8s ease-out;
 }
 
-.app-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 15% 85%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 85% 15%, rgba(255, 119, 198, 0.1) 0%, transparent 50%);
-    pointer-events: none;
+@keyframes appBodyFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .app-container {
     min-height: 100vh;
-    max-width: 1600px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 40px;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    gap: 50px;
-    position: relative;
-    z-index: 1;
+    padding: 20px;
+    animation: appContainerSlideIn 1s ease-out 0.2s both;
+}
+
+@keyframes appContainerSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .app-header {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 40px 50px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(30px);
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 
-        0 30px 60px rgba(0, 0, 0, 0.2),
-        0 15px 30px rgba(102, 126, 234, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    animation: headerSlideDown 1s ease-out 0.4s both;
     position: relative;
-    overflow: hidden;
 }
 
-.app-header::before {
+@keyframes headerSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.app-header::after {
     content: '';
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
-    background-size: 200% 100%;
-    animation: shimmer 4s ease-in-out infinite;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    animation: borderExpand 1.5s ease-out 1s both;
 }
 
-@keyframes shimmer {
-    0%, 100% { background-position: 200% 0; }
-    50% { background-position: -200% 0; }
+@keyframes borderExpand {
+    to {
+        width: 100%;
+    }
 }
 
 .header-left h1 {
-    font-size: 2.2rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-weight: 600;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -2px;
+    animation: titleSlideIn 0.8s ease-out 0.6s both;
+}
+
+@keyframes titleSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .header-right {
     display: flex;
     align-items: center;
-    gap: 35px;
+    gap: 20px;
+    animation: headerRightSlideIn 0.8s ease-out 0.8s both;
+}
+
+@keyframes headerRightSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .user-info {
     display: flex;
     align-items: center;
-    gap: 18px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    gap: 12px;
     transition: all 0.3s ease;
 }
 
 .user-info:hover {
-    background: rgba(255, 255, 255, 0.12);
     transform: translateY(-2px);
 }
 
 .user-avatar {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #667eea;
-    box-shadow: 
-        0 8px 25px rgba(102, 126, 234, 0.4),
-        0 8px 16px rgba(0, 0, 0, 0.2);
-    transition: all 0.4s ease;
+    border: 2px solid #667eea;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.user-avatar::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+    z-index: -1;
+    animation: avatarRotate 3s linear infinite;
+}
+
+@keyframes avatarRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .user-avatar:hover {
-    transform: scale(1.2) rotate(8deg);
-    box-shadow: 
-        0 20px 45px rgba(102, 126, 234, 0.6),
-        0 12px 24px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 .user-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.user-avatar:hover img {
+    transform: scale(1.1);
 }
 
 .sign-out-btn {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 14px 24px;
+    gap: 8px;
+    padding: 8px 16px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
     color: white;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    font-weight: 500;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.sign-out-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.sign-out-btn:hover::before {
+    left: 100%;
 }
 
 .sign-out-btn:hover {
     background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .logout-icon {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.sign-out-btn:hover .logout-icon {
+    transform: rotate(45deg);
 }
 
 .main-content {
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-    gap: 40px;
+    max-width: 100%;
+    animation: mainContentFadeIn 1s ease-out 1s both;
+}
+
+@keyframes mainContentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .tabs-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 25px;
-    backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 8px;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    animation: tabsSlideIn 0.8s ease-out 1.2s both;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes tabsSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.tabs-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.5), transparent);
+    animation: tabsGlow 2s ease-in-out infinite;
+}
+
+@keyframes tabsGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 .tab-btn {
-    padding: 20px 30px;
+    flex: 1;
+    padding: 12px 20px;
     border: none;
-    border-radius: 15px;
+    border-radius: 8px;
     background: transparent;
-    color: #b0b0b0;
+    color: #a0a0a0;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    font-weight: 600;
-    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: 500;
+    font-size: 0.95rem;
     position: relative;
     overflow: hidden;
 }
@@ -504,126 +796,215 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
     opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: -1;
+    transition: opacity 0.3s ease;
 }
 
-.tab-btn.active {
-    color: white;
-    box-shadow: 
-        0 15px 35px rgba(102, 126, 234, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transform: translateY(-4px);
-}
-
-.tab-btn.active::before {
+.tab-btn:hover::before {
     opacity: 1;
 }
 
+.tab-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 1px;
+    animation: tabIndicator 0.3s ease-out;
+}
+
+@keyframes tabIndicator {
+    from {
+        width: 0;
+    }
+    to {
+        width: 30px;
+    }
+}
+
 .tab-btn:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.1);
-    color: #e8e8e8;
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.08);
+    color: #e0e0e0;
+    transform: translateY(-1px);
 }
 
 .add-task-section {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 40px;
-    border-radius: 25px;
-    backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    margin-bottom: 30px;
+    animation: addTaskSlideIn 0.8s ease-out 1.4s both;
+}
+
+@keyframes addTaskSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .task-input-container {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 25px;
-    align-items: center;
+    display: flex;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.task-input-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+    animation: inputGlow 3s ease-in-out infinite;
+}
+
+@keyframes inputGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.task-input-container:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.task-input-container:focus-within {
+    border-color: rgba(102, 126, 234, 0.5);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 #taskInput {
-    padding: 18px 25px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.08);
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    font-size: 1.1rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 #taskInput:focus {
     outline: none;
     border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 
-        0 0 0 4px rgba(102, 126, 234, 0.25),
-        0 15px 35px rgba(102, 126, 234, 0.3);
-    transform: translateY(-4px);
+    transform: translateY(-1px);
 }
 
 #taskInput::placeholder {
-    color: #a8a8a8;
+    color: #a0a0a0;
+    transition: all 0.3s ease;
+}
+
+#taskInput:focus::placeholder {
+    opacity: 0.5;
+    transform: translateX(5px);
 }
 
 .submit-btn {
-    padding: 18px 32px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 12px 24px;
+    background: #667eea;
     border: none;
-    border-radius: 15px;
+    border-radius: 8px;
     color: white;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     white-space: nowrap;
-    font-size: 1.1rem;
-    box-shadow: 
-        0 8px 25px rgba(102, 126, 234, 0.4),
-        0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.submit-btn:hover::before {
+    left: 100%;
 }
 
 .submit-btn:hover {
-    transform: translateY(-6px);
-    box-shadow: 
-        0 25px 50px rgba(102, 126, 234, 0.6),
-        0 15px 30px rgba(0, 0, 0, 0.3);
+    background: #5a67d8;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
 }
 
 .submit-btn:active {
-    transform: translateY(-3px);
+    transform: translateY(0) scale(0.98);
+    transition: all 0.1s ease;
 }
 
 .tasks-container {
     position: relative;
+    animation: tasksContainerFadeIn 0.8s ease-out 1.6s both;
+}
+
+@keyframes tasksContainerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .task-list {
     display: none;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 30px;
+    gap: 16px;
+    flex-direction: column;
 }
 
 .task-list.active {
-    display: grid;
+    display: flex;
 }
 
 .task-card {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    padding: 35px;
-    backdrop-filter: blur(30px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: slideInCard 0.6s ease-out;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: taskCardSlideIn 0.5s ease-out both;
     position: relative;
     overflow: hidden;
-    box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .task-card::before {
@@ -631,30 +1012,42 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.task-card:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 
-        0 35px 70px rgba(0, 0, 0, 0.3),
-        0 20px 40px rgba(102, 126, 234, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom;
 }
 
 .task-card:hover::before {
-    opacity: 1;
+    transform: scaleY(1);
 }
 
-@keyframes slideInCard {
+.task-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.task-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.task-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.task-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.task-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+@keyframes taskCardSlideIn {
     from {
         opacity: 0;
-        transform: translateY(50px) scale(0.9);
+        transform: translateY(30px) scale(0.95);
     }
     to {
         opacity: 1;
@@ -662,128 +1055,188 @@ body {
     }
 }
 
+.task-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
 .task-header {
     display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: 30px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
 }
 
 .task-title {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: white;
-    line-height: 1.5;
-    letter-spacing: -0.5px;
+    line-height: 1.4;
+    flex: 1;
+    margin-right: 16px;
+    transition: all 0.3s ease;
+}
+
+.task-card:hover .task-title {
+    color: #667eea;
+    transform: translateX(5px);
 }
 
 .task-timestamp {
-    font-size: 0.9rem;
-    color: #b0b0b0;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 10px 15px;
-    border-radius: 10px;
-    align-self: flex-start;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    color: #a0a0a0;
+    white-space: nowrap;
+    text-align: right;
+    transition: all 0.3s ease;
+}
+
+.task-card:hover .task-timestamp {
+    color: #c0c0c0;
 }
 
 .task-actions {
     display: flex;
-    gap: 15px;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
 .task-btn {
-    padding: 12px 20px;
+    padding: 8px 16px;
     border: none;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    font-weight: 600;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.task-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.task-btn:hover::before {
+    left: 100%;
 }
 
 .complete-btn {
-    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    background: #10b981;
     color: white;
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
 }
 
 .complete-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.5);
+    background: #059669;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4);
 }
 
 .archive-btn {
     background: rgba(255, 255, 255, 0.1);
-    color: #e8e8e8;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .archive-btn:hover {
     background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.1);
 }
 
 .move-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #667eea;
     color: white;
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
 .move-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+    background: #5a67d8;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+}
+
+.task-btn:active {
+    transform: translateY(0) scale(0.95);
+    transition: all 0.1s ease;
 }
 
 .task-status {
     display: inline-block;
-    padding: 8px 18px;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 18px;
-    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 .status-archived {
-    background: linear-gradient(135deg, rgba(156, 163, 175, 0.3) 0%, rgba(107, 114, 128, 0.25) 100%);
+    background: rgba(156, 163, 175, 0.2);
     color: #d1d5db;
-    border: 1px solid rgba(156, 163, 175, 0.4);
+    border: 1px solid rgba(156, 163, 175, 0.3);
 }
 
 .status-completed {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(52, 211, 153, 0.25) 100%);
+    background: rgba(16, 185, 129, 0.2);
     color: #6ee7b7;
-    border: 1px solid rgba(16, 185, 129, 0.4);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.task-card:hover .task-status {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .notification {
     position: fixed;
-    bottom: 40px;
-    right: 40px;
+    bottom: 20px;
+    right: 20px;
     background: rgba(255, 255, 255, 0.95);
     color: #1f2937;
-    padding: 30px 35px;
-    border-radius: 25px;
-    box-shadow: 
-        0 40px 80px rgba(0, 0, 0, 0.3),
-        0 20px 40px rgba(102, 126, 234, 0.2);
-    backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     z-index: 1000;
-    animation: slideInNotification 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 400px;
+    animation: notificationSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 300px;
+    transform: translateX(400px);
 }
 
-@keyframes slideInNotification {
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.hide {
+    animation: notificationSlideOut 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes notificationSlideIn {
     from {
         opacity: 0;
-        transform: translateX(150px) scale(0.8);
+        transform: translateX(400px) scale(0.8);
     }
     to {
         opacity: 1;
@@ -791,71 +1244,189 @@ body {
     }
 }
 
+@keyframes notificationSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(400px) scale(0.8);
+    }
+}
+
 .notification-content h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #1f2937;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    animation: notificationTitleFade 0.3s ease-out 0.2s both;
+}
+
+@keyframes notificationTitleFade {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .notification-content p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #6b7280;
+    animation: notificationTextFade 0.3s ease-out 0.4s both;
+}
+
+@keyframes notificationTextFade {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced slideIn animation for backward compatibility */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Loading animation for dynamic content */
+@keyframes loadingSpinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: loadingSpinner 1s linear infinite;
+    margin: 0 auto;
+}
+
+/* Micro-interactions */
+.interactive-element {
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.interactive-element:active {
+    transform: scale(0.95);
+}
+
+/* Focus states for accessibility */
+.tab-btn:focus,
+.task-btn:focus,
+.submit-btn:focus,
+.verify-btn:focus,
+.sign-out-btn:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #5a67d8, #6b46c1);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        padding: 30px 20px;
+        padding: 15px;
     }
     
     .form-container {
-        padding: 50px 40px;
-        max-width: 450px;
+        padding: 30px 20px;
+        max-width: 350px;
     }
     
     .logo-section h1 {
-        font-size: 3rem;
-    }
-    
-    .shield-icon {
-        width: 100px;
-        height: 100px;
-        font-size: 56px;
+        font-size: 2rem;
     }
     
     .app-container {
-        padding: 30px 20px;
-        gap: 35px;
+        padding: 15px;
     }
     
     .app-header {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        text-align: center;
-        padding: 35px 30px;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
     }
     
     .header-right {
-        justify-content: center;
+        width: 100%;
+        justify-content: space-between;
     }
     
     .tabs-container {
-        grid-template-columns: 1fr;
-        gap: 15px;
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .tab-btn {
+        text-align: left;
     }
     
     .task-input-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .task-list {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        gap: 12px;
     }
     
     .task-header {
-        gap: 15px;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .task-timestamp {
+        text-align: left;
     }
     
     .task-actions {
@@ -863,43 +1434,43 @@ body {
     }
     
     .notification {
-        bottom: 30px;
-        right: 20px;
-        left: 20px;
+        bottom: 15px;
+        right: 15px;
+        left: 15px;
         max-width: none;
     }
 }
 
 @media (max-width: 480px) {
     .form-container {
-        padding: 40px 30px;
+        padding: 25px 15px;
     }
     
     .logo-section h1 {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
     }
     
     .shield-icon {
-        width: 90px;
-        height: 90px;
-        font-size: 48px;
+        width: 60px;
+        height: 60px;
+        font-size: 36px;
     }
     
     .app-header h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .task-card {
-        padding: 30px;
+        padding: 16px;
     }
     
     .task-actions {
-        gap: 12px;
+        gap: 6px;
     }
     
     .task-btn {
-        padding: 12px 20px;
-        font-size: 0.95rem;
+        padding: 6px 12px;
+        font-size: 0.8rem;
     }
 }
 
