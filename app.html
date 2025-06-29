@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Todo App - TaskFlow</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-body">
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1>My Todo App</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span id="userName">keval</span>
+                    <div class="user-avatar">
+                        <img id="userAvatar" src="" alt="User Avatar">
+                    </div>
+                </div>
+                <button id="signOutBtn" class="sign-out-btn">
+                    <span class="logout-icon">↗</span>
+                    Sign Out
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="todo">
+                    Todo (<span id="todoCount">0</span>)
+                </button>
+                <button class="tab-btn" data-tab="completed">
+                    Completed (<span id="completedCount">0</span>)
+                </button>
+                <button class="tab-btn" data-tab="archived">
+                    Archived (<span id="archivedCount">0</span>)
+                </button>
+            </div>
+
+            <div class="add-task-section">
+                <div class="task-input-container">
+                    <input type="text" id="taskInput" placeholder="Add your task (text-box)" maxlength="200">
+                    <button id="submitBtn" class="submit-btn">Submit</button>
+                </div>
+            </div>
+
+            <div class="tasks-container">
+                <div id="todoTasks" class="task-list active"></div>
+                <div id="completedTasks" class="task-list"></div>
+                <div id="archivedTasks" class="task-list"></div>
+            </div>
+        </main>
+
+        <div id="notification" class="notification" style="display: none;">
+            <div class="notification-content">
+                <h3 id="notificationTitle">Task Updated</h3>
+                <p id="notificationMessage">Task moved to Completed.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
