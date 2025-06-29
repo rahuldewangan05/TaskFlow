@@ -42,7 +42,61 @@
             <div class="add-task-section">
                 <div class="task-input-container">
                     <input type="text" id="taskInput" placeholder="Add your task (text-box)" maxlength="200">
+                    <div class="task-metadata-container">
+                        <select id="categorySelect" class="task-select">
+                            <option value="general">📋 General</option>
+                            <option value="work">💼 Work</option>
+                            <option value="personal">👤 Personal</option>
+                            <option value="shopping">🛒 Shopping</option>
+                            <option value="health">🏥 Health</option>
+                            <option value="learning">📚 Learning</option>
+                            <option value="finance">💰 Finance</option>
+                            <option value="travel">✈️ Travel</option>
+                        </select>
+                        <select id="prioritySelect" class="task-select">
+                            <option value="low">🟢 Low</option>
+                            <option value="medium">🟡 Medium</option>
+                            <option value="high">🟠 High</option>
+                            <option value="urgent">🔴 Urgent</option>
+                        </select>
+                    </div>
                     <button id="submitBtn" class="submit-btn">Submit</button>
+                </div>
+            </div>
+
+            <div class="search-filter-section">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search tasks..." maxlength="100">
+                    <button id="clearSearchBtn" class="clear-search-btn" style="display: none;">×</button>
+                </div>
+                <div class="filter-container">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="recent">Recent</button>
+                    <button class="filter-btn" data-filter="older">Older</button>
+                    <div class="filter-divider"></div>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="general">📋 General</option>
+                        <option value="work">💼 Work</option>
+                        <option value="personal">👤 Personal</option>
+                        <option value="shopping">🛒 Shopping</option>
+                        <option value="health">🏥 Health</option>
+                        <option value="learning">📚 Learning</option>
+                        <option value="finance">💰 Finance</option>
+                        <option value="travel">✈️ Travel</option>
+                    </select>
+                    <select id="priorityFilter" class="filter-select">
+                        <option value="">All Priorities</option>
+                        <option value="low">🟢 Low</option>
+                        <option value="medium">🟡 Medium</option>
+                        <option value="high">🟠 High</option>
+                        <option value="urgent">🔴 Urgent</option>
+                    </select>
+                </div>
+                <div class="data-management-container">
+                    <button id="exportBtn" class="data-btn export-btn">📤 Export Data</button>
+                    <button id="importBtn" class="data-btn import-btn">📥 Import Data</button>
+                    <input type="file" id="importFileInput" accept=".json" style="display: none;">
                 </div>
             </div>
 
