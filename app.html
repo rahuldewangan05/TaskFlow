@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Todo App - TaskFlow</title>
+    <title>TaskFlow - Todo App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="app-body">
     <div class="app-container">
         <header class="app-header">
             <div class="header-left">
-                <h1>My Todo App</h1>
+                <h1>TaskFlow</h1>
             </div>
             <div class="header-right">
                 <div class="user-info">
-                    <span id="userName">keval</span>
-                    <div class="user-avatar">
-                        <img id="userAvatar" src="" alt="User Avatar">
-                    </div>
+                    <span id="userName">User</span>
+                    <img id="userAvatar" src="" alt="Avatar" class="user-avatar">
                 </div>
                 <button id="signOutBtn" class="sign-out-btn">
-                    <span class="logout-icon">↗</span>
-                    Sign Out
+                    ↗ Sign Out
                 </button>
             </div>
         </header>
@@ -41,8 +38,8 @@
 
             <div class="add-task-section">
                 <div class="task-input-container">
-                    <input type="text" id="taskInput" placeholder="Add your task (text-box)" maxlength="200">
-                    <div class="task-metadata-container">
+                    <input type="text" id="taskInput" placeholder="Add your task..." maxlength="200">
+                    <div class="task-metadata">
                         <select id="categorySelect" class="task-select">
                             <option value="general">📋 General</option>
                             <option value="work">💼 Work</option>
@@ -50,8 +47,6 @@
                             <option value="shopping">🛒 Shopping</option>
                             <option value="health">🏥 Health</option>
                             <option value="learning">📚 Learning</option>
-                            <option value="finance">💰 Finance</option>
-                            <option value="travel">✈️ Travel</option>
                         </select>
                         <select id="prioritySelect" class="task-select">
                             <option value="low">🟢 Low</option>
@@ -60,7 +55,7 @@
                             <option value="urgent">🔴 Urgent</option>
                         </select>
                     </div>
-                    <button id="submitBtn" class="submit-btn">Submit</button>
+                    <button id="submitBtn" class="submit-btn">Add Task</button>
                 </div>
             </div>
 
@@ -70,10 +65,6 @@
                     <button id="clearSearchBtn" class="clear-search-btn" style="display: none;">×</button>
                 </div>
                 <div class="filter-container">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="recent">Recent</button>
-                    <button class="filter-btn" data-filter="older">Older</button>
-                    <div class="filter-divider"></div>
                     <select id="categoryFilter" class="filter-select">
                         <option value="">All Categories</option>
                         <option value="general">📋 General</option>
@@ -82,8 +73,6 @@
                         <option value="shopping">🛒 Shopping</option>
                         <option value="health">🏥 Health</option>
                         <option value="learning">📚 Learning</option>
-                        <option value="finance">💰 Finance</option>
-                        <option value="travel">✈️ Travel</option>
                     </select>
                     <select id="priorityFilter" class="filter-select">
                         <option value="">All Priorities</option>
@@ -92,11 +81,7 @@
                         <option value="high">🟠 High</option>
                         <option value="urgent">🔴 Urgent</option>
                     </select>
-                </div>
-                <div class="data-management-container">
-                    <button id="exportBtn" class="data-btn export-btn">📤 Export Data</button>
-                    <button id="importBtn" class="data-btn import-btn">📥 Import Data</button>
-                    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+                    <button id="sortBtn" class="sort-btn">Sort by Priority</button>
                 </div>
             </div>
 
@@ -109,8 +94,7 @@
 
         <div id="notification" class="notification" style="display: none;">
             <div class="notification-content">
-                <h3 id="notificationTitle">Task Updated</h3>
-                <p id="notificationMessage">Task moved to Completed.</p>
+                <span id="notificationMessage">Task updated!</span>
             </div>
         </div>
     </div>
